@@ -1,16 +1,21 @@
-from typing import List
-
-from fastapi import BackgroundTasks, FastAPI
+import os
+from dotenv import load_dotenv
 from fastapi_mail import ConnectionConfig, FastMail, MessageSchema, MessageType
-from pydantic import BaseModel, EmailStr
+from domain.models.pautaSchema import EmailSchema
 from starlette.responses import JSONResponse
-from enviroments.credentials import MAIL_USERNAME, MAIL_PASSWORD,MAIL_FROM,MAIL_SERVER,MAIL_PORT
+from fastapi import APIRouter
 
+pauta = APIRouter(
+  prefix="/pauta"
+)
 
+load_dotenv()
 
-class EmailSchema(BaseModel):
-    email: List[EmailStr]
-
+MAIL_USERNAME=os.getenv("MAIL_USERNAME")
+MAIL_PASSWORD=os.getenv("MAIL_PASSWORD")
+MAIL_FROM=os.getenv("MAIL_FROM")
+MAIL_PORT=os.getenv("MAIL_PORT")
+MAIL_SERVER=os.getenv("MAIL_SERVER")
 
 conf = ConnectionConfig(
     MAIL_USERNAME = MAIL_USERNAME,
@@ -24,15 +29,11 @@ conf = ConnectionConfig(
     VALIDATE_CERTS = True
 )
 
-app = FastAPI()
-
-
 html = """
 <p>Thanks for using Fastapi-mail</p> 
 """
 
-
-@app.post("/email")
+@pauta.post("/email")
 async def simple_send(email: EmailSchema) -> JSONResponse:
 
     message = MessageSchema(
