@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 from fastapi_mail import ConnectionConfig, FastMail, MessageSchema, MessageType
-from domain.models.pautaSchema import EmailSchema
+from ..domain.models.pautaSchema import EmailSchema
 from starlette.responses import JSONResponse
 from fastapi import APIRouter
 
@@ -29,19 +29,31 @@ conf = ConnectionConfig(
     VALIDATE_CERTS = True
 )
 
-html = """
-<p>Thanks for using Fastapi-mail</p> 
-"""
 
 @pauta.post("/email")
 async def simple_send(email: EmailSchema) -> JSONResponse:
+    # Use os campos adicionados ao objeto EmailSchema para preencher o corpo do e-mail
+    html = f"""
+    <html>
+    <head></head>
+    <body>
+        <h1>Tema: {email.tema}</h1>
+        <p>Descrição: {email.descricao}</p>
+        <p>Quando: {email.quando}</p>
+        <p>Local: {email.local}</p>
+        <p>Responsável: {email.responsavel}</p>
+        <p>Telefone do Responsável: {email.telefone_responsavel}</p>
+        <p>Email para Contato: {email.email_contato}</p>
+    </body>
+    </html>
+    """
 
     message = MessageSchema(
         subject="Fastapi-Mail module",
-        recipients=email.dict().get("email"),
+        recipients=email.email,
         body=html,
         subtype=MessageType.html)
 
     fm = FastMail(conf)
     await fm.send_message(message)
-    return JSONResponse(status_code=200, content={"message": "email has been sent"})  
+    return JSONResponse(status_code=200, content={"message": "email has been sent"})

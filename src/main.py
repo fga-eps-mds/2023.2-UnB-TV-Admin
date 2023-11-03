@@ -1,7 +1,7 @@
 from typing import List
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import BackgroundTasks, FastAPI
-from controller import pautaController
+from .controller import pautaController
 
 
 app = FastAPI()
