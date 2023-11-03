@@ -49,8 +49,8 @@ async def simple_send(email: EmailSchema) -> JSONResponse:
     """
 
     message = MessageSchema(
-        subject="Fastapi-Mail module",
-        recipients=email.email,
+        subject="Sugestão de Pauta",
+        recipients=email.recipients,
         body=html,
         subtype=MessageType.html)
 

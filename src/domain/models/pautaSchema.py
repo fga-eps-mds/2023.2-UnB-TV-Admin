@@ -2,7 +2,7 @@ from pydantic import BaseModel, ConfigDict, EmailStr
 from typing import List
 
 class EmailSchema(BaseModel):
-    email: List[EmailStr]
+    recipients: List[EmailStr]
     tema: str
     descricao: str
     quando: str

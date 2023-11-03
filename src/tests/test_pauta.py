@@ -11,14 +11,14 @@ from ..main import app  # Certifique-se de importar o aplicativo FastAPI correta
 async def test_simple_send():
     # Dados de exemplo com uma lista de endereços de e-mail
     test_email_data = {
-        "email": ["ricardoloureiro75@gmail.com"],
+        "recipients": ["ricardoloureiro75@gmail.com"],
         "tema": "Exemplo de Tema",
         "descricao": "Exemplo de Descrição",
         "quando": "Exemplo de Quando",
         "local": "Exemplo de Local",
         "responsavel": "Exemplo de Responsável",
         "telefone_responsavel": "Exemplo de Telefone",
-        "email_contato": "exemplo@email.com"
+        "email_contato": "geraldovictor@outlook.com"
     }
 
     # Use o cliente de teste para fazer uma solicitação POST ao endpoint
