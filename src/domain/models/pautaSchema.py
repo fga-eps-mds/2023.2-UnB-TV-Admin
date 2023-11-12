@@ -9,4 +9,4 @@ class EmailSchema(BaseModel):
     local: str
     responsavel: str
     telefone_responsavel: str
-    email_contato: EmailStr
+    email_contato: str
