@@ -2,7 +2,7 @@ import pytest
 import asyncio
 from httpx import AsyncClient
 from fastapi.testclient import TestClient
-from ..main import app  # Certifique-se de importar o aplicativo FastAPI corretamente
+from src.main import app  # Certifique-se de importar o aplicativo FastAPI corretamente
 
 # ...
 
