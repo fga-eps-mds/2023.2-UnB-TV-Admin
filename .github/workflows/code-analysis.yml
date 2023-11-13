@@ -40,6 +40,11 @@ jobs:
       - name: Executa Pytest
         run: PYTHONPATH=src python -m coverage run -m pytest --continue-on-collection-errors --junitxml=./junit.xml
         env:
+          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+          MAIL_PORT: ${{ secrets.MAIL_PORT }}
+          MAIL_SERVER: ${{ secrets.MAIL_SERVER }}
+          MAIL_FROM: ${{ secrets.MAIL_FROM }}
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_HOST: localhost
