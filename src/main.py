@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi import BackgroundTasks, FastAPI
 from src.controller import pautaController
 import sys
+import uvicorn 
 
 
 app = FastAPI()
