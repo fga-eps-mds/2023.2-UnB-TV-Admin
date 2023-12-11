@@ -4,6 +4,7 @@ from httpx import AsyncClient
 from fastapi.testclient import TestClient
 from src.main import app  
 
+client = TestClient(app)
 
 @pytest.mark.asyncio
 async def test_simple_send():
@@ -25,3 +26,9 @@ async def test_simple_send():
 
     
     assert response.status_code == 200
+
+def test_root_request():
+  response = client.get('/')
+  data = response.json()
+  assert response.status_code == 200
+  assert data['message'] == 'UnB-TV!'
